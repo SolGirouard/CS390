@@ -1,0 +1,250 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,graphicx,url}
+
+% Old Stuff
+%%\oddsidemargin=0.15in
+%%\evensidemargin=0.15in
+%%\topmargin=-.5in
+%%\textheight=9in
+%%\textwidth=6.25in
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6.25in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\heading}[5]{
+   \renewcommand{\thepage}{#1-\arabic{page}}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{
+    \hbox to 6.2in { {\bf CS390 Computational Game Theory and Mechanism Design}
+     	 \hfill #2 }
+       \vspace{4mm}
+       \hbox to 6.2in { {\Large \hfill #5  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.2in { {\it #3 \hfill #4} }
+      }
+   }
+   \end{center}
+   \vspace*{4mm}
+}
+
+\newcommand{\handout}[3]{\heading{#1}{#2}{Yiqing Hua}{}{#3}}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.1in}
+
+\DeclareMathOperator*{\argmax}{argmax}
+
+\begin{document}
+\handout{1}{June 30, 2013}{Problem Set 1}
+
+\paragraph{Problem 1} (No collaborator.)
+%(Collaborated with AAA, BBB, and CCC.)
+
+\begin{enumerate}
+    \item There is only one that 
+          \begin{align*}
+            \sigma = (\frac{1}{3}R + \frac{1}{3}P + \frac{1}{3}S, 
+            \frac{1}{3}R + \frac{1}{3}P + \frac{1}{3}S)
+          \end{align*}
+          For any other $\sigma_{-i}$, 
+          \begin{align*}
+          u_1(\sigma_1, \sigma_{-1}) = u_2(\sigma_2, \sigma_{-2}) = 0
+          \end{align*}
+          First, we'll prove that, for $\sigma_2$, $\sigma_1$ is the best response.
+          Suppose there is another $\sigma_1' = aR + bP + cS$, $a + b + c = 1$.
+          \begin{align*}
+          u_1'(\sigma_1', \sigma_2) = -1/3a + 1/3a - 1/3b + 1/3b - 1/3c + 1/3c = 0 
+          \end{align*}
+          Therefore, 
+          \begin{align*}
+          \sigma_1 \in \argmax_{\sigma_1'}u_1(\sigma_1', \sigma_{-1})
+          \end{align*}
+          By semmetry, 
+          \begin{align*}
+          \sigma_2 \in \argmax_{\sigma_2'}u_1(\sigma_2', \sigma_{-2})
+          \end{align*}
+          So $\sigma$ is a Nash Equilibrium. \\
+          Next, we'll prove that, for any other $\sigma' \neq \sigma$, $\sigma'$ is not a Nash Equilibrium. \\
+          Assume that $\sigma_1' = aR + bP + cS$, $a + b + c = 1$, $\sigma_1' \neq \sigma_1$. 
+          Then we'll assume that $\sigma_2' = cR + aP + bS$.
+          \begin{align*}
+           u_1 &= -a^2 + ab - b^2 + bc - c^2 + ac  \\
+                &= -\frac{1}{2}(a - b)^2 - \frac{1}{2}(a - c)^2 - \frac{1}{2}(b - c)^2  
+          \end{align*}
+          Since $\sigma_1' \neq \sigma_1$, then we can suppose $a \neq b$ W.O.L.G.
+          Therefore, 
+          \begin{align*}
+          u_1 < 0 = u_1(\sigma_1, \sigma_2')
+          \end{align*}
+          $\sigma_1'$ can not be part of a NE. 
+          By semmetry, $\sigma_2' = aR + bP + cS$, $a + b + c = 1$, $\sigma_2' \neq \sigma_2$.
+          $\sigma_2$ can not be part of a NE. \\
+          Therefore, there is only one Nash Equilibrium in an Rock-Paper-Scissors game.
+     \item $\sigma = (\frac{2}{3}B + \frac{1}{3}S, \frac{1}{3}B + \frac{2}{3}S)$ is a NE. \\
+           We'll prove that $\sigma_1$ is the best response for $\sigma_2$.
+           We have 
+           \begin{align*}
+           u_1(\sigma_1, \sigma_{-1}) = \frac{2}{3}
+           \end{align*}
+           Assume that $\sigma_1' = aB + bS$, $a + b = 1$.
+           \begin{align*}
+           u_1' = \frac{1}{3}a \cdot 2 + \frac{2}{3}b \cdot 1 = \frac{2}{3}(a + b) = \frac{2}{3}
+           \end{align*}
+           Then 
+           \begin{align*}
+           \sigma_1 \in \argmax_{\sigma_1'}u_1(\sigma_1', \sigma_{-1})
+           \end{align*}
+           By semmetry
+           \begin{equation*}
+           \sigma_2 \in \argmax_{\sigma_2'}u_2(\sigma_2', \sigma_{-2})
+           \end{equation*}
+           So $\sigma$ is a Nash Equilibrium.
+     \item There are three Equilibria $\sigma = (B, B)$ or $\sigma = (S, S)$, 
+            and the mixed one given above.\\ 
+            Suppose there exist another $\sigma' = (aB + bS, a'B + b'S)$ is a Nash Equilibrium.
+            \begin{align*}
+                u_1 &= 2aa' + bb'\\
+                u_2 &= aa' + 2bb'
+            \end{align*}
+            Suppose that $2a' > b'$, we have
+            \begin{align*}
+                u_1 &= b'(a + b) + (2a' - b')a \\
+                    &= b' + (2a' - b')a 
+            \end{align*}
+            For fixed $a',b'$, $a = 1, b = 0$ is the best response. 
+            So we have $u_2 = a'$, to get the bigges utility. $\sigma = (B, B)$ \\
+            Suppose that $2a' < b'$,
+            \begin{align*}
+                u_1 &= 2a'(a + b) + (b - 2a')b \\
+                    &= 2a' + (b - 2a')b
+            \end{align*}
+            For fixed $a', b'$, $a = 0, b = 1$ is the best response.
+            Then we have $u_2 = 2b'$, $\sigma = (S, S)$ \\
+            When $2a' = b'$, $a' + b' = 1$, $a' = \frac{1}{3}, b' = \frac{2}{3}$.
+            From the proof above, we have $a = \frac{2}{3}, b = \frac{1}{3}$. \\
+            So there are three Equilibria for BoS game.
+     \item We'll construct the game $G = \langle N, S, u \rangle$.
+           \begin{itemize}
+           \item $N = \{1, 2\}$
+           \item $S = S_1 \times S_2$ \\
+                 $S_i = \mathbb{N}$
+           \item $u_i = \begin{cases}
+                        s_i &\mbox{$s_i$ is the maximum of the two numbers players choose} \\
+                        0 &\mbox{other}
+                        \end{cases}$
+           \end{itemize}
+           Suppose player 1 chooses number $a$, 
+           then he can also choose any number larger than $a$ and the number player 2 choose, 
+           to get a better uitlity.  
+           By semmetry, there is also no best response for player 2 when given choice of player 1. \\
+           Therefore, G is a game with no Nash Equilibrium. 
+
+      
+          
+ 
+          
+\end{enumerate}
+
+\bigskip
+
+\paragraph{Problem 2} (No collaborator.)
+
+\begin{enumerate}
+    \item $G = \langle N, S, u \rangle$.
+        \begin{itemize}
+            \item $N = \{1, 2, 3 \ldots , n\}$ denoting the players.
+            \item $S = S_1 \times S_2 \times \ldots \times S_n$ \\
+                  $S_i = \mathbb{N}$ denoting the prices each player give.
+            \item $u_i(s_1, s_2, \dots, s_n) = 
+                  \begin{cases}
+                        v_i - s_i  &\mbox{$s_i$ is the highest price among the others} \\
+                        0 &\mbox{other} 
+                  \end{cases}
+                  $
+        \end{itemize}
+          The equilibriua are in the form of $\sigma = \{s_1, s_2, s_3, \ldots, s_n\}$,
+          $v_1 \geq s_1 \geq v_2 - 1$,
+          $\exists s_i, i \neq 1, s_i = s_1$,
+          $\forall i \geq 2$, 
+          $0 < s_i \leq s_1$, $s_i \in \mathbb{N}$.
+        We'll prove that in an equilibrium, player 1 always gets the object by contradiction. \\
+        Suppose that player 1 does not get the object. So that there must exist a player $i$, 
+        $s_i > v_1$, or by making the bid less that or equal to $v_1$, player 1 can get the object 
+        having utility larger than or equal to 0. \\
+        By the definition of the game $u_i = v_i - s_i < v_i - v_1 < 0$, 
+        the strategy is worse than giving a price less than $s_1$ getting profit of $0$.\\
+        Therefore, player 1 always gets the object in a Nash Equilibrium.
+        \item We'll define the notion of weakly dominance as follows. \\
+              $s_i$ weakly dominates $s_i'$ iff $u_i(s_i, S_{-i}) \geq u_i(s_i', S_{-i})$.\\
+              Then, we'll prove that $v_i$ is a weakly dominated strategy.
+              Suppose that player i gets the object, then he'll pay the price $p \leq v_i$.
+              So he gets the utility $\geq 0$.
+              Choosing any higher price then $v_i$ won't change his utility.
+              If he chooses $s_i < v_i$, if $s_i < p$, he'll lose the object having utility 0.
+              If $s_i = p$, if he still has an earlier label then all people bidding $p$.
+              He'll get the object and still having the utility $v_i - p$.
+              Or he'll lose the object having utility 0. 
+              If $s_i > p$, the utility won't change. \\
+              We'll prove that player 1 gives the bid of $v_2$ and player 2 gives the bid of $v_1 + 1$ 
+              when other players' bids are all less than $v_2$ is a equilibrium and player 2 gets the objects.\\
+              We can see that the only way player 1 gets the object is by bidding larger than $v_1 + 1$
+              and he'll get the utility less than 0, or he'll always gets the utility 0. 
+              So $v_2$ is the rational choice for him to make. \\
+              While for player 2, he'll always gets the utility 0 so this is a equilibrium for him.
+              And for the others, they'll always get 0, and if they want the object 
+              they need to get the utility less than 0.
+              Therefore, it is a equilibrium while player 2 gets the object.
+              
+
+
+
+\end{enumerate}
+
+\bigskip
+
+\paragraph{Problem 3} (No collaborator.)
+
+First, consider the situation that player 1 choose 100.
+Suppose the sum of others is $S$, $S < 14 \times 100$.
+Since the average is at least $100$, player 1 has utility $0$.
+To have some profit, 
+\begin{align*}
+   \frac{S + s_1}{15\times3} = s_1
+\end{align*}
+He can choose any number closer to $\frac{S}{44} < 100$.
+Therefore, we can eliminate $100$ from his strategy set.\\
+Similarly, we can eliminate $100$ from any othes' strategy set. \\
+Then $99$ become the biggest number that any one can choose.
+We have $S < 14 \time 99$
+Similarly, it can make no profits.
+And we can choose some less $s_i$ closer to $\frac{S}{44}$.
+We can eliminate $99$ from everyone's strategy set. \\
+Then comes $98,97 \ldots$. \\
+Finally we have only $1$ left in our strategy set.
+So for everyone the equilibrium is like everyone chooses 1.
+
+
+\bibliographystyle{agsm}
+
+\begin{thebibliography}{99}
+
+\bibitem{OR94}{M. J. Osborne and A. Rubinstein. {\em A course in game theory.} MIT Press, 1994.}
+
+\bibitem{NRTV07}{N. Nisan, T. Roughgarden, E. Tardos, and V. Vazirani (eds). {\em Algorithmic game theory.} Cambridge University Press, 2007. (Available at \url{http://www.cambridge.org/journals/nisan/downloads/Nisan_Non-printable.pdf}.)}
+
+\end{thebibliography}
+
+\end{document}
+
+
+
+
+
+
+
+

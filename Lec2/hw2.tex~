@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,graphicx,url}
+
+% Old Stuff
+%%\oddsidemargin=0.15in
+%%\evensidemargin=0.15in
+%%\topmargin=-.5in
+%%\textheight=9in
+%%\textwidth=6.25in
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6.25in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\heading}[5]{
+   \renewcommand{\thepage}{#1-\arabic{page}}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{
+    \hbox to 6.2in { {\bf CS390 Computational Game Theory and Mechanism Design}
+     	 \hfill #2 }
+       \vspace{4mm}
+       \hbox to 6.2in { {\Large \hfill #5  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.2in { {\it #3 \hfill #4} }
+      }
+   }
+   \end{center}
+   \vspace*{4mm}
+}
+
+\newcommand{\handout}[3]{\heading{#1}{#2}{Yiqing Hua}{}{#3}}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.1in}
+
+\begin{document}
+\handout{1}{July 3, 2013}{Problem Set 2}
+
+\paragraph{Problem 1} (No collaborator.)
+
+First we'll prove that $D$ can never be a best response for any $\sigma_{-3} \in \delta(S_{-3})$. \\
+If $D$ is a best response for some $\sigma_{-3} = (k_1L+(1-k_1)R, k_2U+(1-k_2)D)$.
+Then it should satisfy that,
+\begin{align*}
+    u_3(A, \sigma_{-3}) = 9k_1k_2 &\leq 6k_1k_2 + 6(1-k_1)(1-k_2) = u_3(D, \sigma_{-3}) \\
+    u_3(B, \sigma_{-3}) &= 9k_1(1 - k_2) + 9k_2(1 - k_1) \leq u_3(D, \sigma_{-3}) \\
+    u_3(C, \sigma_{-3}) &= 9(1 - k_1)(1 - k_2) \leq u_3(D, \sigma_{-3}) \\
+    0 \leq &k_1 \leq 1 \\
+    0 \leq &k_2 \leq 1
+\end{align*}
+By using mathematica, we'll find that there is no $k_1, k_2$ satisfies the above inequailities.
+Thus, there doesn't exist a situation such that $D$ is the best response for it. \\
+If $D$ is strictly dominated, then it is a never best response. 
+Therefore for any $\sigma_{-3} \in \delta(S_{-3})$, $\sigma_3 \in B_3(\sigma_{-3})$, $D \notin \sigma_3$. \\
+For $\sigma_{-3} = (\frac{1}{2}L + \frac{1}{2}R , \frac{1}{2}U + \frac{1}{2}D)$.
+We can easily find that $u_3(\frac{1}{2}B + \frac{1}{2}D, \sigma_{-3}) = 7.5$. 
+Then we'll prove that for any mixed strategy that does not contain $D$ may acheive a less utility than $7.5$.\\
+For any mixed strategy that does not contain $D$, assume it's $\sigma_3' = aA + bB + (1 - a - b)C$, 
+$0 \leq a \leq 1$, $0 \leq b \leq 1$.
+\begin{align*}
+u_3(\sigma_3', \sigma_{-3}) &= \frac{9}{4}a + \frac{9}{2}b + \frac{9}{4}(1 - a - b) \\
+                            &= \frac{9}{4} + \frac{9}{4}b \leq 4.5 < 7.5
+\end{align*}
+Thus any mixed strategy taht does not contain $D$ is not the best response for $\sigma_{-3}$.\\
+Therefore, $D \in B_3(\sigma_{-3})$, and it is not a never best response. 
+So, $D$ is not strictly dominated.
+
+
+
+
+\bigskip
+
+\paragraph{Problem 2} (No collaborator.)
+
+We'll construct a game played by only one player.
+He can choose whether to play it or terminate it.
+The utility of terminating the game is 0, and that of playing it infinitely is 1. \\
+For the profile that he always terminates the game,
+for any nodes in the game tree, if he chooses the other strategy that he'll continue to play it, 
+he'll still get the utility of 0, since he'll terminate it in the next step.
+But this probile is obviously not the SPE.
+So this is a game that not do not hold the one deviation property.
+
+
+\bigskip
+
+\paragraph{Problem 3} (No collaborator.)
+
+Consider the situation that if there are only two persons left, D and E. 
+Since whatever proposal D gives, he himself will accept it and whatever E agrees on that proposal, they'll have a tie. 
+So D can distribute in any way to maximize his utility,
+he'll give 100 to himself and 0 to E. \\
+When there are three persons left C, D, E.
+Then whatever proposal C gives, if he gives E more than 1 coin.
+E will accept the proposal since C and E can make the majority and E will get more than if they throw C out of the deck.
+Therefore, to maximize his own utility, 
+E may give E 1 coin and give C nothing while he himself has the other 99.  \\
+Then we'll consider the situation when there are B, C, D, E left.
+If anyone other than B accepts his proposal, B can survive.
+Then if B gives 1 coin to D, D can get more than when B is thrown overboard.
+So for B, his best choice is to give D 1 coin and the others nothing while he can get 99 coins. \\
+Then, finally, we'll consider the initial state.
+At this moment, C and E will find that if A gives them some profits, 
+it's better for them to let A survive.
+So for A, his best choice is to give C and E 1 coin each and others nothing while he can get 98 coins left.
+This is the final distribution of the coins.
+
+\bibliographystyle{agsm}
+
+\begin{thebibliography}{99}
+
+
+\bibitem{OR94}{M. J. Osborne and A. Rubinstein. {\em A course in game theory.} MIT Press, 1994.}
+
+\bibitem{NRTV07}{N. Nisan, T. Roughgarden, E. Tardos, and V. Vazirani (eds). {\em Algorithmic game theory.} Cambridge University Press, 2007. (Available at \url{http://www.cambridge.org/journals/nisan/downloads/Nisan_Non-printable.pdf}.)}
+
+\end{thebibliography}
+
+\end{document}
+
+
+
+
+
+
+
+

@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,graphicx,url}
+\usepackage{fullpage}
+
+
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}{Observation}
+
+
+\newenvironment{proof}{\noindent{\em Proof.} \hspace*{1mm}}{
+	\hspace*{\fill} $\Box$ }
+\newenvironment{proof_of}[1]{\noindent {\bf Proof of #1:}
+	\hspace*{1mm}}{\hspace*{\fill} $\Box$ }
+\newenvironment{proof_claim}{\begin{quotation} \noindent}{
+	\hspace*{\fill} $\diamond$ \end{quotation}}
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6.25in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\heading}[5]{
+   \renewcommand{\thepage}{#1-\arabic{page}}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{
+    \hbox to 6.2in { {\bf CS390 Computational Game Theory and Mechanism Design}
+     	 \hfill #2 }
+       \vspace{4mm}
+       \hbox to 6.2in { {\Large \hfill #5  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.2in { {\it #3 \hfill #4} }
+      }
+   }
+   \end{center}
+   \vspace*{4mm}
+}
+
+\newcommand{\handout}[3]{\heading{#1}{#2}{Scribed by Yiqing Hua}{}{#3}}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.1in}
+
+\begin{document}
+\handout{1}{July 1, 2013}{Lecture 1, Part 2}
+In this class we talked about iterated elimination.   \\
+In a strategic game, 
+if one pure strategy strictly dominates the others then it is obvious the strategy we seek for. \\
+We'll talk about the notion of strictly dominence, 
+and the process to eliminate the strategies strictly dominated by the others
+so that none of the players may choose them.
+
+\section{Definitions}
+
+Iterated elimination is defined as follows.
+
+\begin{definition}\label{def:normal}
+    In a strategic game $\langle N, S, u \rangle$,
+    a set $X \subseteq S$ survives iterated elimination of strictly dominated strategy of $X = X_1 \times X_2 \dots \times X_n$, if $\exists$ a finite sequence $S^0, S^1 \dots S^K$ s.t 
+    \begin{itemize}
+        \item $S^0 = S$
+        \item $S^k = S^k_1 \times S^k_2 \dots S^k_n$
+        \item $S^K = X$
+        \item $\forall 0 \leq k \leq K$, 
+              $S^{k + 1}_i \subseteq S^k_i$, 
+              and $S^k \backslash S^{k + 1} \neq \emptyset$
+        \item $\forall i$, $s_i \in S^k_i \backslash S^{k + 1}_i$,
+              if $\exists \sigma_i \in \delta(S^k_i),$ s.t
+              $u_i(\sigma_i, S_{-i}) > u_i(s_i, S_{-i})$
+               $\forall S_{-i} \in S_{-i}^k.$
+              For $G^k = \langle N, S^k, u \rangle$,
+              we say that $s_i$ is strictly dominated by $\sigma_i$ in $G^k$, that $s_i \prec \sigma_i$.
+        \item $\forall i$, 
+              $S_i^K$ contains no strategy that is strictly dominated over $S^K$.
+    \end{itemize}
+\end{definition}
+
+\paragraph{Remark.}
+    Note that $\sigma_i$ can be either pure strategy or mixed strategy 
+    while $s_i \in S_i^k$ are all pure strategies.
+
+
+\section{Example}
+Given the game $\langle \{1,2\}, \{T, M, B\} \times \{L, R\}, u\rangle$.
+The utility is given as the following table.
+\begin{table}[hbtp]
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
+         & L     & R \\ \hline
+    T    & (3, 0)& (0, 1) \\ \hline
+    M    & (0, 0)& (3, 1) \\ \hline  
+    B    & (1, 1)& (1, 0) \\ \hline
+  \end{tabular}
+  \caption{The utility of the given game.}\label{tab:1}
+\end{table}
+The iterated elimination acts as follows. \\
+\begin{itemize}
+    \item
+    First we have $S^0 = S = \{T, M, B\} \times \{L, R\}$ \\
+    Since no pure strategy can dominate any strategy of each player, 
+    we should look for some mixed strategy to do our elimination. \\
+    We choose $\sigma_1 = \frac{1}{2}M + \frac{1}{2}T$.
+    Then we have 
+    \begin{align*}
+        u_1(\sigma_1, L) = 1.5 > 1 = u_1(B, L) \\
+        u_1(\sigma_1, R) = 1.5 > 1 = u_1(B, R)
+    \end{align*}
+    Therefore, $B$ is strictly dominated by $\sigma_1$.
+    We can get $S^1$.
+    \item
+    $S^1 = \{T, M\} \times \{L, R\}$ \\
+    Consider player 2, we have 
+    \begin{align*}
+        u_2(T, R) = 1 > 0 = u_2(T, L)\\
+        u_2(M, R) = 1 > 0 = u_2(M, L)
+    \end{align*}
+    Therefore, $L$ is strictly dominated by $R$.
+    We now have $S^2$.
+    \item
+    $S^2 = \{T, M\} \times \{R\}$ \\
+    Since $u_1(M, R) = 3 > 0 = u_1(T, R)$,
+    we can now eliminate strategy $T$.
+    \item
+    And now we have the final state $S^3 = \{M\} \times \{R\}$.
+\end{itemize}
+
+
+%\begin{figure}
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=0.3\textwidth]{x.pdf}\\
+%  \caption{A figure}\label{fig:1}
+%\end{figure}
+
+
+\bibliographystyle{agsm}
+
+\begin{thebibliography}{99}
+
+\bibitem{OR94}{M. J. Osborne and A. Rubinstein. {\em A course in game theory.} MIT Press, 1994.}
+
+\bibitem{NRTV07}{N. Nisan, T. Roughgarden, E. Tardos, and V. Vazirani (eds). {\em Algorithmic game theory.} Cambridge University Press, 2007. (Available at \url{http://www.cambridge.org/journals/nisan/downloads/Nisan_Non-printable.pdf}.)}
+    
+\end{thebibliography}
+
+\end{document}
+
+
+
+
+
+
+
+
