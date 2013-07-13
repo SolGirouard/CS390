@@ -14,6 +14,8 @@
 \setlength{\topmargin}{-0.4in}
 \setlength{\textheight}{8.5in}
 
+\DeclareMathOperator*{\Expect}{\mathbb{E}}
+
 \newcommand{\heading}[5]{
    \renewcommand{\thepage}{#1-\arabic{page}}
    \noindent
@@ -40,7 +42,7 @@
 \begin{document}
 \handout{1}{July 8, 2013}{Problem Set 3}
 
-\paragraph{Problem 1} %(Collaborated with AAA, BBB, and CCC.)
+\paragraph{Problem 1} (No collaborator.)
 
 The Nash equilibria are still two, the one that all choose the lower route,
 and the one that only one choose the upper route. 
@@ -50,29 +52,70 @@ Suppose there are $k$ person choose the lower route,
 let $c$ be the value of the objective function.
 \begin{align*}
     c &= \frac{n - k + (\frac{k}{n})^dk}{n}  \\
-      &= \frac{n - k + k^{d + 1}/n^d}{n}
-    \frac{dc}{dk} &= -\frac{1}{n} + (d + 1)k^d/n^{d + 1} 
+      &= \frac{n - k + k^{d + 1}/n^d}{n} \\
+    c' &= -\frac{1}{n} + (d + 1)k^d/n^{d + 1} 
 \end{align*}
-To make $c$ be the minimum, the derivitive should be $0$. 
+To make $c$ be the minimum, the derivetive should be $0$. 
 \begin{align*}
-    k &= n - (\frac{n}{2})^{\frac{d}{2d-1}} \\
-    c &= 1 - ((\frac{1}{2})^{\frac{d}{2d-1}} - (\frac{1}{2})^{\frac{2d^2}{2d-1}})n^{\frac{1 - d}{2d-1}} 
+	k &= \frac{n}{(d + 1)^{1/d}} \\ 
+	c &= 1 - (d + 1)^{-1/d} + (d + 1)^{-1-1/d}  \\
+	  &= 1 - (1 + d)^{1/d \cdot -1} + (1 + d)^{1/d \cdot -(d + 1)}
 \end{align*}
-When $n$ goes to infinity, $d > 1$, $\frac{1 - d}{2d - 1} < 0$ then $c$ goes to $1$.
-Then PoA is 1. \\
-When $d$ goes to infinity, 
+When $n$ goes to infinity, PoA goes to $\frac{1}{1 - (d + 1)^{-1/d} + (d + 1)^{-1-1/d}}$. \\
+When $d$ goes to infinity,  
+$c$ goes to $0$.\\
+Then PoA goes to infinity.
 
 \bigskip
 
-\paragraph{Problem 2} (Collaborated with YYY and ZZZ.)
+\paragraph{Problem 2} (No collaborator.)
 
-Your solution goes here.
+Suppose the strategy set having the best sum of utility is $S$,
+and the strategy set of the NE having the worst objective function  is $S'$.\\
+Consider a single player $i$, 
+if the absolute value of his utility in the NE exceed n times his utility in the $S$,
+then he can choose his route in $S$, 
+since no matter how many people choose the same route as him,
+his cost on this route won't exceed $n$ times any possible cost on this route. \\
+Then for any player, in NE, 
+the absolute value of his cost won't exceed $n$ times that of his cost in $S$.
+Then the absolute value of total cost in NE won't exceed $n$ times that of the best objective function.\\
+Therefore, the price of anarchy won't exceed $1$.
+
 
 \bigskip
 
 \paragraph{Problem 3} (No collaborator.)
 
-Your solution goes here.
+The minimum value of the objective function is $n$.
+Since no matter how the player chooses his strategy, 
+mixed or pure, his utility is always larger than or equal to $1$.
+And when we let player $i$ choose the ith machine, we can reach the objective function $n$.\\
+The pure NE is the permutations of $n$, and they all have the objective funcion of $n$.
+So we'll only consider the only mixed Nash Equilibrium,
+that $\forall i$, $\sigma_i = \frac{1}{n}M_1 + \frac{1}{n}M_2 \ldots + \frac{1}{n}M_n$.\\
+We'll use the indicator function,
+\begin{align*}
+X_{ij} = 
+\begin{cases}
+            1 &\mbox{$s_i = M_j$, $\forall M_j$} \\
+            0 &\mbox{otherwise} \\
+         \end{cases}
+\end{align*}
+\begin{align*}
+\Expect_{s_i \sim \sigma_i} c_{ij} 
+    &= 1 + \Sigma_{k \neq i, s_k \sim \sigma_i}\Expect X_{kj} \\
+    &= 1 + \Sigma_{k \neq i}\frac{1}{n} \cdot 1 + (1 - \frac{1}{n}) \cdot 0\\
+    &= 1 + \frac{n - 1}{n} \\
+    &= 2 - \frac{1}{n} \\
+\Expect c_i &= \Sigma_{k = 1}^n \frac{1}{n}c_{ik} \\
+            &= \frac{2 - 1/n}{n} \\
+f(\sigma) &= \Sigma_{i = 1}^n c_i \\
+          &= 2 - \frac{1}{n} \\
+PoA &= \frac{2 - \frac{1}{n}}{n}
+\end{align*}
+
+
 
 \bibliographystyle{agsm}
 
